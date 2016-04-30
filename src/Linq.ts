@@ -49,7 +49,11 @@ declare global {
             <TKey>(Func: (item: T) => TKey): Array<T>;
             <TKey>(Func: (item: T) => TKey, comparer: (a: TKey, b: TKey) => number): Array<T>;
         };
-
+        SelectMany: {
+            <TSource, TResult>(selector: (item: TSource) => Array<TResult>): Array<TResult>;
+            <TSource, TCollection, TResult>(selector: (item: TSource) => Array<TCollection>,
+                resultSelector: (parent: TSource, child: TCollection) => TResult): Array<TResult>;
+        };
         Add(item: T): Array<T>;
         All(Func: Predicate<T>): boolean;
         Average(Func: (item: T) => number): number;
@@ -169,7 +173,6 @@ Array.prototype.Where = function (func: (item: any) => boolean): Array<any> {
     }
     return result;
 };
-
 Array.prototype.Select = function (func: (item: any) => any): Array<any> {
     let a: Array<any> = this;
     let result: Array<any> = [];
@@ -178,12 +181,29 @@ Array.prototype.Select = function (func: (item: any) => any): Array<any> {
     }
     return result;
 };
-
+Array.prototype.SelectMany = function (selector: (item: any) => any[], resultSelector?: (parent: any, child: any) => any): Array<any> {
+    let a: Array<any> = this;
+    let result: Array<any> = [];
+    if (!resultSelector) {
+        for (let i of a) {
+            let val = selector(i);
+            result = result.concat(val);
+        }
+        return result;
+    }
+    for (let i of a) {
+        let col = selector(i);
+        for (let j of col) {
+            let val = resultSelector(i, j);
+            result.push(val);
+        }
+    }
+    return result;
+};
 Array.prototype.Skip = function (count: number) {
     let a: Array<any> = this;
     return a.slice(count);
 };
-
 Array.prototype.SkipWhile = function (func: (item: any) => boolean): Array<any> {
     let a: Array<any> = this, i: number = 0;
     for (let i of a) {
