@@ -1,0 +1,14 @@
+typings
+tools
+spec
+.editorconfig
+.travis.yml
+appveyor.yml
+gulpfile.ts
+karma.conf.js
+protractor.conf.js
+tsconfig.json
+tslint.json
+typings.json
+src/*.spec.ts
+src/*.spec.js
