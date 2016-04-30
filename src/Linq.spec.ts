@@ -2,7 +2,7 @@
 describe('Array', () => {
     describe('All', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('All value should be less than 6', () => {
@@ -16,7 +16,7 @@ describe('Array', () => {
     });
     describe('Add', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('Length should be increased to one', () => {
@@ -32,7 +32,7 @@ describe('Array', () => {
     });
     describe('Any', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('It should return true', () => {
@@ -47,7 +47,7 @@ describe('Array', () => {
     });
     describe('Remove', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('Length should be 4 after remvoe', () => {
@@ -63,7 +63,7 @@ describe('Array', () => {
     });
     describe('Average', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('Average should be equal to 3', () => {
@@ -73,7 +73,7 @@ describe('Array', () => {
     });
     describe('Where', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('It should filter odd number', () => {
@@ -87,7 +87,7 @@ describe('Array', () => {
     });
     describe('OrderBy', () => {
         let list: Array<any>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [
                 { name: 'Abirami', age: 32, place: 'chennai' },
                 { name: 'Sakthi', age: 35, place: 'Perambalur' },
@@ -143,7 +143,7 @@ describe('Array', () => {
 
     describe('Skip', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('Skip first 2 items - Check Length', () => {
@@ -158,7 +158,7 @@ describe('Array', () => {
     });
     describe('Take', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('Take first 3 items - Check Length', () => {
@@ -173,7 +173,7 @@ describe('Array', () => {
     });
     describe('Skip and Take', () => {
         let list: Array<number>;
-        beforeEach(function () {
+        beforeEach(() => {
             list = [1, 2, 3, 4, 5];
         });
         it('Skip first 2 items and take 2 items - Length', () => {
@@ -184,6 +184,51 @@ describe('Array', () => {
             let res = <Array<number>>list.Skip(2).Take(2);
             let val = [3, 4];
             return expect(res).toEqual(val);
+        });
+    });
+    describe('SelectMany', () => {
+        class User {
+            name: string;
+            age: number;
+            place: string;
+            contacts: Array<string>;
+        }
+        class Result {
+            name: string;
+            contact: string;
+        }
+        let list: Array<User>;
+
+        beforeEach(() => {
+            list = [
+                { name: 'Abirami', age: 32, place: 'chennai', contacts: ['9597123', '994210'] },
+                { name: 'Sakthi', age: 35, place: 'Perambalur', contacts: ['9597145', '994263'] },
+                { name: 'Karthik', age: 28, place: 'Erode', contacts: ['9597154', '994223'] },
+                // { name: 'Manikandan', age: 31, place: 'Darmapuri', contacts: ['9597123', '994212'] },
+                // { name: 'Srini', age: 55, place: 'chennai', contacts: ['9554123', '994310'] },
+                // { name: 'Bhubanaganesh', age: 29, place: 'Tanjure', contacts: ['9592823', '986210'] },
+                // { name: 'Rajasekaran', age: 32, place: 'Kottampatti', contacts: ['9727123', '964210'] }
+            ];
+        });
+        it('It should select manyitems', () => {
+            let res = list.SelectMany<User, string>(x => x.contacts);
+            let exp = ['9597123', '994210', '9597145', '994263', '9597154', '994223'];
+            // '9597123', '994212', '9554123', '994310', '9592823', '986210',
+            // '9727123', '964210'];
+            return expect(exp).toEqual(res);
+        });
+        it('It should select from result ', () => {
+            let res = list.SelectMany<User, string, Result>(x => x.contacts,
+                (p: User, c: string) => { return { name: p.name, contact: c }; });
+            let exp = [
+                { name: 'Abirami', contact: '9597123' },
+                { name: 'Abirami', contact: '994210' },
+                { name: 'Sakthi', contact: '9597145' },
+                { name: 'Sakthi', contact: '994263' },
+                { name: 'Karthik', contact: '9597154' },
+                { name: 'Karthik', contact: '994223' }
+            ];
+            return expect(exp).toEqual(res);
         });
     });
     describe('Object Compare Test', () => {

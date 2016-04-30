@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Fri Apr 29 2016 12:55:10 GMT+1200 (New Zealand Standard Time)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -31,7 +31,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'dist/**/!(*spec).js': ['coverage']
+      //'dist/**/!(*spec).js': ['coverage']
     },
 
 
@@ -69,5 +69,15 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
+  });
+  if (process.env.APPVEYOR) {
+    config.browsers = ['IE'];
+    config.singleRun = true;
+    config.browserNoActivityTimeout = 90000; // Note: default value (10000) is not enough
+  }
+
+  if (process.env.TRAVIS || process.env.CIRCLECI) {
+    config.browsers = ['Chrome_travis_ci'];
+    config.singleRun = true;
+  }
 }
