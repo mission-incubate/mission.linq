@@ -1,6 +1,6 @@
 {
   "name": "mission.linq",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "Linq for Typescript",
   "main": "src/Linq.ts",
   "scripts": {
@@ -16,7 +16,6 @@
     "gulp": "gulp",
     "karma": "karma",
     "karma.start": "karma start",
-    "postinstall": "typings install && gulp check.versions && npm prune",
     "reinstall": "npm cache clean && npm install",
     "serve.coverage": "remap-istanbul -b src/ -i coverage/coverage-final.json -o coverage -t html && npm run gulp -- serve.coverage",
     "serve.dev": "gulp serve.dev",
@@ -73,6 +72,7 @@
     "open": "0.0.5",
     "orchestrator": "^0.3.7",
     "parse-glob": "^3.0.4",
+    "publish-please": "^1.1.0",
     "remap-istanbul": "git+https://github.com/SitePen/remap-istanbul.git#master",
     "rimraf": "^2.5.2",
     "run-sequence": "^1.1.5",

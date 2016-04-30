@@ -1,4 +1,5 @@
-///<reference path="./Linq.ts" />
+///<reference path="./index.ts" />
+
 describe('Array', () => {
     describe('All', () => {
         let list: Array<number>;

@@ -1,4 +1,4 @@
-/// <reference path="../src/linq.ts" />
+/// <reference path="../src/index.ts" />
 
 describe('Array', () => {
     let list: Array<number>;

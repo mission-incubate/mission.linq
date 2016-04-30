@@ -124,3 +124,12 @@ gulp.task('test', (done: any) =>
   runSequence('build.test',
               'karma.start',
               done));
+
+// --------------
+
+gulp.task('deploy', (eone:any) =>{
+  runSequence('clean.all',
+              'build.test',
+              'npm.publish.prepare'
+  )
+});

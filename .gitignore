@@ -3,3 +3,7 @@ typings
 dist
 ref
 coverage
+npm-debug.log
+index.ts
+index.js
+!src/index.ts
