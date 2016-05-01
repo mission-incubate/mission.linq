@@ -1,5 +1,8 @@
 // Karma configuration
 // Generated on Fri Apr 29 2016 12:55:10 GMT+1200 (New Zealand Standard Time)
+'use strict';
+
+var argv = require('yargs').argv;
 
 module.exports = function (config) {
   config.set({
