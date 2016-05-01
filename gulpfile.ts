@@ -116,8 +116,8 @@ gulp.task('serve.prod', (done: any) =>
   runSequence('build.prod',
               'server.prod',
               done));
-
-
+              
+              
 // --------------
 // Test.
 gulp.task('test', (done: any) =>
@@ -126,10 +126,9 @@ gulp.task('test', (done: any) =>
               done));
 
 // --------------
-
-gulp.task('deploy', (eone:any) =>{
+// NPM package publish
+gulp.task('deploy', (done: any) =>
   runSequence('clean.all',
               'build.test',
-              'npm.publish.prepare'
-  )
-});
+              'npm.publish.prepare',
+              done));
