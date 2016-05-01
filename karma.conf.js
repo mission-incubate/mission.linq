@@ -86,7 +86,13 @@ module.exports = function (config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    // Passing command line arguments to tests
+    client: {
+      files: argv.files
+    }
+
   });
   if (process.env.APPVEYOR) {
     config.browsers = ['IE'];
