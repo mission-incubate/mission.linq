@@ -21,7 +21,7 @@ import 'mission.linq';
  let list: Array<number>= [1, 2, 3, 4, 5];
  let res:boolean = list.All((x) => x < 6);
 ```
- ####Add
+####Add
  ```javascript
  list.Add(6);
 ```
@@ -37,4 +37,4 @@ npm run karma.start           # 2nd window
 
 # Contributors
 
-[<img alt="natarajanmca11" src="https://avatars.githubusercontent.com/u/9244766?v=3&s=117" width="117">](https://github.com/natarajanmca11) |[<img alt="sakthi2579"     src="https://avatars.githubusercontent.com/u/17495860?v=3&s=117" width="117"](https://github.com/sakthi2579)
+[<img alt="natarajanmca11" src="https://avatars.githubusercontent.com/u/9244766?v=3&s=117" width="117">](https://github.com/natarajanmca11) | [<img alt="sakthi2579" src="https://avatars.githubusercontent.com/u/17495860?v=3&s=117" width="117"](https://github.com/sakthi2579)
